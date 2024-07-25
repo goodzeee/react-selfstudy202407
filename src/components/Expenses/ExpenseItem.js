@@ -1,6 +1,7 @@
 import React from 'react';
 import './ExpenseItem.css';
 import ExpenseDate from './ExpenseDate';
+import Card from '../UI/Card';
 
 export const ExpenseItem = ({date, title, price: exPrice}) => {  // 디스턱처링하여 앞에 붙이지 않고 꺼내서 단순하게 사용 !
     // console.log('props: ', aaa);
@@ -29,14 +30,14 @@ export const ExpenseItem = ({date, title, price: exPrice}) => {  // 디스턱처
     const formattedPrice = new Intl.NumberFormat('ko-KR').format(expensePrice);
 
   return (
-    <div className='expense-item'>
+    <Card className='expense-item'>
         {/* 날짜처리하는 컴포넌트 별도로 처리 ! */}
         <ExpenseDate exDate={date}/>
         <div className='expense-item__description'>
             <h2>{title}</h2>
             <div className='expense-item__price'>{formattedPrice}원</div>
         </div>
-    </div>
+    </Card>
   )
 }
 

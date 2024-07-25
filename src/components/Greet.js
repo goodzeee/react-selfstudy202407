@@ -1,13 +1,15 @@
 import React from "react";
+import Card from "./UI/Card";
 
-const Greet = () => {
+const Greet = (ccc) => {
 
     return (
-        <ul>
-            <li>사과</li>
-            <li>딸기</li>
-            <li>오렌지</li>
-        </ul>
+      <>
+      {/* 숨어있는 props 안에 children이 존재한다 ! */}
+      <Card className='border-green'>
+        <h1>hello react ! {ccc.children}</h1>
+      </Card>
+      </>
     );
 };
 
