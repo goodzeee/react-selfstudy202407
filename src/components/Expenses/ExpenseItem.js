@@ -14,20 +14,28 @@ export const ExpenseItem = ({date, title, price: exPrice}) => {  // 디스턱처
     // 함수 선언
 
     // 1자리 숫자를 2자리수로 변환하는 함수
-    const make2digit = (text) => {
-        return text.toString().padStart(2, '0');
-    };
+    // const make2digit = (text) => {
+    //     return text.toString().padStart(2, '0');
+    // };
 
-    const makeFormattedDate = () => {
-        const year = date.getFullYear();
-        const month = date.getMonth();
-        const day = date.getDate();
+    // const makeFormattedDate = () => {
+    //     const year = date.getFullYear();
+    //     const month = date.getMonth();
+    //     const day = date.getDate();
 
-        return `${year}년 ${month}월 ${make2digit(day)}일`;
-    };
+    //     return `${year}년 ${month}월 ${make2digit(day)}일`;
+    // };
 
     // 원화 표기법으로 변환
     const formattedPrice = new Intl.NumberFormat('ko-KR').format(expensePrice);
+
+    // 이벤트 핸들러 선언
+    const clickHandler = e => {
+        console.log('버튼 클릭함 !');
+
+        // const $price = document.querySelectorAll('.expense-item__price');
+        // console.log($price);
+    }
 
   return (
     <Card className='expense-item'>
@@ -37,6 +45,9 @@ export const ExpenseItem = ({date, title, price: exPrice}) => {  // 디스턱처
             <h2>{title}</h2>
             <div className='expense-item__price'>{formattedPrice}원</div>
         </div>
+
+        <button id='btn' onClick={clickHandler}>버튼1</button>
+        <button id='btn2' onMouseOver={e => { alert('허허 !'); }}>버튼2</button>
     </Card>
   )
 }
