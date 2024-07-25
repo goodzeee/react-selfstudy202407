@@ -2,6 +2,7 @@ import "./App.css";
 import React from "react";
 import ExpenseList from "./components/Expenses/ExpenseList";
 import Greet from "./components/Greet";
+import Counter from "./components/practice/Counter";
 
 const App = () => {
   // 서버에서 지출항목 JSON 배열을 응답 받음
@@ -21,6 +22,7 @@ const App = () => {
 
   return (
     <>
+     <Counter />
      <ExpenseList expenses={expenses} />
     </>
   );
