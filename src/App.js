@@ -4,6 +4,7 @@ import ExpenseList from "./components/Expenses/ExpenseList";
 import Greet from "./components/Greet";
 import Counter from "./components/practice/Counter";
 import NewExpense from "./components/new-expense/NewExpense";
+import CheckBoxStyle from "./components/practice/CheckBoxStyle";
 
 const App = () => {
   // 서버에서 지출항목 JSON 배열을 응답 받음
@@ -21,9 +22,18 @@ const App = () => {
     },
   ];
 
+  // ❕❕ ExpenseForm에게 내려보낼 함수 -> 내려보낸 바구니에서 userInput 데이터 담아옴 !
+  const onAddExpense = (userInput) => {
+    console.log('App.js가 내려보낸 함수 호출');
+    console.log(userInput);
+    // 위에 expenses 객체에 추가하기 ! push   
+    expenses.push(userInput);
+  }
+
   return (
     <>
-     <NewExpense />
+     <CheckBoxStyle />
+     <NewExpense onSave={onAddExpense}/>
      <ExpenseList expenses={expenses} />
     </>
   );
