@@ -22,12 +22,14 @@ export const ExpenseItem = ({date, title, price: exPrice}) => {  // 디스턱처
 
     // 이벤트 핸들러 선언
     const clickHandler = e => {
-
         /*
           - useState가 관리하는 상태값은 반드시 setter로만 변경해야 한다 !
         */
+      if(itemTitle === '짜장면') {
+        setItemTitle(title);
+      } else {
         setItemTitle('짜장면');
-
+      }
         console.log('버튼 클릭함 !');
     };
 

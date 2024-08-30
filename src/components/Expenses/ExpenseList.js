@@ -4,7 +4,19 @@ import ExpenseItem from './ExpenseItem'
 const ExpenseList = ({ expenses }) => {
   return (
     <div className='expenses'>
-        <ExpenseItem
+      {expenses.length === 0 ? (
+        <p>No expenses found.</p>
+      ) : (
+        expenses.map((expense, index) => (
+          <ExpenseItem
+          key={index}
+          title={expense.title}
+          price={expense.price}
+          date={expense.date}
+          />
+        ))
+      )}
+        {/* <ExpenseItem
         title={expenses[0].title}
         price={expenses[0].price}
         date={expenses[0].date}
@@ -18,9 +30,9 @@ const ExpenseList = ({ expenses }) => {
         title={expenses[2].title}
         price={expenses[2].price}
         date={expenses[2].date}
-      />
+      /> */}
     </div>
-  )
-}
+  );
+};
 
 export default ExpenseList
