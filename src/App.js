@@ -37,7 +37,7 @@ const App = () => {
       });
       setExpenses(updatedExpenses);
     }
-  })
+  }, []);  // 빈 배열을 의존성으로 추가 => 무한루프 막고 처음 마운트될 때만 실행되게 !
 
   // ❕❕ ExpenseForm에게 내려보낼 함수 -> 내려보낸 바구니에서 userInput 데이터 담아옴 !
   const onAddExpense = (expense) => {
