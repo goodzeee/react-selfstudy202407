@@ -16,7 +16,6 @@ const ExpenseForm = ({ onAdd, onCancel }) => {
     date: ''
   });
 
-
   // 오늘 날짜를 YYYY-MM-DD 형식으로 가져오는 함수
   const getTodayDate = () => {
     const today = new Date();

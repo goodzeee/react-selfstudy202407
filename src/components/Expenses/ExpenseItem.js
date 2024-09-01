@@ -5,9 +5,7 @@ import Card from '../UI/Card';
 
 export const ExpenseItem = ({date, title, price: exPrice}) => {  // 디스턱처링하여 앞에 붙이지 않고 꺼내서 단순하게 사용 !
     // console.log('props: ', aaa);
-
-    // 함수 선언
-
+    
     // 💡💡useState는 컴포넌트의 상태값을 관리하며 이 상태값은 렌더링에 영향을 미침
     /*
       - useState 훅의 리턴값은 배열이며
