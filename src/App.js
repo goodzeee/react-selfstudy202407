@@ -7,7 +7,7 @@ import NewExpense from "./components/new-expense/NewExpense";
 import CheckBoxStyle from "./components/practice/CheckBoxStyle";
 
 const App = () => {
-  // 서버에서 지출항목 JSON 배열을 응답 받음
+  // 서버에서 지출항목 JSON 쌩배열을 응답 받음
   // const expenses = [
   //   {
   //     title: "수영장 등록",
@@ -22,6 +22,7 @@ const App = () => {
   //   },
   // ];
 
+  // 위 지출내역을 배열 상태변수로 관리 !
   // 지출내역 배열로 받아서 add expense 할 수 있도록 추가
   const [expenses, setExpenses] = useState([]);
 
@@ -48,6 +49,7 @@ const App = () => {
     setExpenses((prevExpenses) => {
       const updatedExpenses = [...prevExpenses, expense];
       localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
+      console.log(updatedExpenses);
       return updatedExpenses;
     });
   };
