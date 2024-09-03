@@ -28,7 +28,23 @@ const ExpenseList = ({ expenses }) => {
     return mappedArray;
   };
 
-  const filteredExpenses = expenses.filter((expense) => expense.date.getFullYear().toString() === filteredYear.toString());
+  // 연도로 필터링한 배열
+  const filteredExpenses = expenses.filter((expense) => 
+    expense.date.getFullYear().toString() === filteredYear.toString());
+
+  // 🌟🌟조건부 렌더링
+  // 지출 데이터가 있을 때 보여줄 태그
+  const expenseContent = filteredExpenses.map((expense) => (
+    <ExpenseItem
+    key={Math.random().toString()}
+    title={expense.title}
+    price={expense.price}
+    date={expense.date}
+    />
+  ));
+
+  // 지출 데이터가 없을 때 보여줄 태그
+  const noExpense = <p>지출 항목이 없습니다.</p>
 
   return (
     <div className='expenses'>
@@ -38,7 +54,7 @@ const ExpenseList = ({ expenses }) => {
       {/* 새로운 배열로 지출내역 하나하나 가져오고 새내역 추가해주는 배열 ! */}
       {/* { convertToComponentArray }  */}
 
-      {filteredExpenses.length === 0 ? (
+      {/* {filteredExpenses.length === 0 ? (
         <p>No expenses found.</p>
       ) : (
         filteredExpenses.map((expense) => (
@@ -49,7 +65,8 @@ const ExpenseList = ({ expenses }) => {
           date={expense.date}
           />
         ))
-      )}
+      )} */}
+      {filteredExpenses.length === 0 ? noExpense : expenseContent}
 
         {/* <ExpenseItem
         title={expenses[0].title}
