@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ExpenseItem from './ExpenseItem'
 import ExpenseFilter from './ExpenseFilter';
+import './ExpenseList.css';
 
 const ExpenseList = ({ expenses }) => {
   // 🌟🌟선택된 연도로 필터링된 지출내역을 재렌더링하기 위해 상태값으로 관리 !!
