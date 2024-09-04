@@ -4,7 +4,9 @@
   }
   
   .expenses-filter__control {
-    display: flex;
+    /* display: inline-grid;
+    margin-left: 1850px; */
+    display: inline-grid;
     width: 100%;
     align-items: center;
     justify-content: space-between;
