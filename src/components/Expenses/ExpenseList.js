@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ExpenseItem from './ExpenseItem'
 import ExpenseFilter from './ExpenseFilter';
 import './ExpenseList.css';
+import ExpenseChart from '../chart/ExpenseChart';
 
 const ExpenseList = ({ expenses }) => {
   // 🌟🌟선택된 연도로 필터링된 지출내역을 재렌더링하기 위해 상태값으로 관리 !!
@@ -52,6 +53,7 @@ const ExpenseList = ({ expenses }) => {
       {/* {[<h1>하하호호</h1>]} 🌟🌟배열에 태그 담으면 알아서 추가된 렌더링을 해줌. */}
 
       <ExpenseFilter onChangeFilter={onFilterChange}/>
+      <ExpenseChart />
       {/* 새로운 배열로 지출내역 하나하나 가져오고 새내역 추가해주는 배열 ! */}
       {/* { convertToComponentArray }  */}
 
