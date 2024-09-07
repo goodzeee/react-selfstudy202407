@@ -5,6 +5,8 @@ import Greet from "./components/Greet";
 import Counter from "./components/practice/Counter";
 import NewExpense from "./components/new-expense/NewExpense";
 import CheckBoxStyle from "./components/practice/CheckBoxStyle";
+import CourseInput from "./components/CourseGoals/CourseInput";
+import CourseList from "./components/CourseGoals/CourseList";
 
 const App = () => {
   // 서버에서 지출항목 JSON 쌩배열을 응답 받음
@@ -54,12 +56,35 @@ const App = () => {
     });
   };
 
-  return (
-    <>
-     <CheckBoxStyle />
+  {/* <CheckBoxStyle />
      <NewExpense onSave={onAddExpense}/>
-     <ExpenseList expenses={expenses} />
-    </>
+     <ExpenseList expenses={expenses} /> */}
+
+// 💦💦💦 new practice
+
+     // 기본 목표 더미 데이터 2개 넣고 시작
+     const DUMMY_DATA = [
+      {
+        id:'g1',
+        text: '리액트 컴포넌트 스타일링 마스터하기'
+      },
+      {
+        id: 'g2',
+        text: '백앤드 spring boot 마스터하기'
+      },
+     ];
+     // 기본 목표 더미 데이터를 초기값으로 상태값 관리 !
+     const [goals, setGoals] = useState(DUMMY_DATA);
+
+  return (
+     <div>
+      <section id='goal-form'>
+        <CourseInput />
+      </section>
+      <section id="goals">
+        <CourseList items = {goals}/>
+      </section>
+    </div> 
   );
 };
 
