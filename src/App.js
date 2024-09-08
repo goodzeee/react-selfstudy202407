@@ -76,10 +76,16 @@ const App = () => {
      // 기본 목표 더미 데이터를 초기값으로 상태값 관리 !
      const [goals, setGoals] = useState(DUMMY_DATA);
 
+     // CourseInput에게 전달할 함수
+     const addGoalHandler = (goalOject) => {
+      // 기존 목표 더미 배열 복사하고 끝에 새로운 목표 추가 데이터 넣기 !
+      setGoals([...goals, goalOject]);
+     }; 
+
   return (
      <div>
       <section id='goal-form'>
-        <CourseInput />
+        <CourseInput onAdd={addGoalHandler}/>
       </section>
       <section id="goals">
         <CourseList items = {goals}/>
