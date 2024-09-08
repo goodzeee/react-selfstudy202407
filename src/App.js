@@ -73,14 +73,40 @@ const App = () => {
         text: '백앤드 spring boot 마스터하기'
       },
      ];
-     // 기본 목표 더미 데이터를 초기값으로 상태값 관리 !
+     // 기본 목표 더미 배열을 초기값으로 상태값 관리 !
      const [goals, setGoals] = useState(DUMMY_DATA);
 
-     // CourseInput에게 전달할 함수
+     // CourseInput에게 추가할 목표 전달할 함수
      const addGoalHandler = (goalOject) => {
       // 기존 목표 더미 배열 복사하고 끝에 새로운 목표 추가 데이터 넣기 !
       setGoals([...goals, goalOject]);
      }; 
+
+     // CoureseItem에게 삭제를 위해 목표 아이디 전달할 함수
+     const deleteGoalHandler = (id) => {
+      console.log(id);
+
+      let index = -1;
+      //❕❕ 1. 목표 객체를 반복문 돌려서 일치한 아이디 찾기
+      // 인덱스로 0 ~ ++ 목표 순서대로 부여해주기 !
+      // for(let i = 0; i < goals.length; i++) {
+      //   if(goals[i].id === id) {
+      //     index = i;
+      //     break;
+          
+      //   }
+      // }
+      // console.log('index: ', index);
+
+      //❕❕ 2. 위 for문 대신 findIndex() 사용하여 목표 하나씩 꺼내 id 일치하는지 반복문 돌려줌 !
+      goals.splice(goals.findIndex(g => g.id === id), 1); // 클릭된 목표 인덱스 1나 삭제해주기
+      
+      // setGoals([...goals]);
+
+      //❕❕ 3. 위 필터링된 목표 아이디가 같지 않은 것만 필터링 되도록
+      // 그러면 같은 목표 아이디는 삭제된 목표 객체로 나옴.
+      setGoals(goals.filter(g => g.id !== id));
+     };
 
   return (
      <div>
@@ -88,7 +114,7 @@ const App = () => {
         <CourseInput onAdd={addGoalHandler}/>
       </section>
       <section id="goals">
-        <CourseList items = {goals}/>
+        <CourseList items = {goals} onDelete={deleteGoalHandler}/>
       </section>
     </div> 
   );
