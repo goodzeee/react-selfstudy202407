@@ -23,7 +23,7 @@
     border-color: #8b005d;
   }
   
-  
+  /* 입력값 검증 스타일링을 위한 css */
   .form-control.invalid input {
     border-color: red;
     background: #ffd7d7;
