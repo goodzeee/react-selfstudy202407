@@ -7,6 +7,8 @@ import NewExpense from "./components/new-expense/NewExpense";
 import CheckBoxStyle from "./components/practice/CheckBoxStyle";
 import CourseInput from "./components/CourseGoals/CourseInput";
 import CourseList from "./components/CourseGoals/CourseList";
+import AddUsers from "./components/Users/AddUsers";
+import UserList from "./components/Users/UserList";
 
 const App = () => {
   // 서버에서 지출항목 JSON 쌩배열을 응답 받음
@@ -56,7 +58,7 @@ const App = () => {
     });
   };
 
-  {/* <CheckBoxStyle />
+  {/* return <CheckBoxStyle />
      <NewExpense onSave={onAddExpense}/>
      <ExpenseList expenses={expenses} /> */}
 
@@ -108,15 +110,36 @@ const App = () => {
       setGoals(goals.filter(g => g.id !== id));
      };
 
+    // <section id='goal-form'>
+    //   <CourseInput onAdd={addGoalHandler}/>
+    // </section>
+    // <section id="goals">
+    //   <CourseList items = {goals} onDelete={deleteGoalHandler}/>
+    // </section>
+
+    // 💦💦💦 User 등록하는 new practice
+
+    const DUMMY_USERS = [
+      {
+        id:'u1',
+        name: '강길동',
+        age: 32
+      },
+      {
+        id: 'u2',
+        text: '조둥짝',
+        age: 26
+      },
+     ];
+     
+     const [user, setUser] = useState(DUMMY_USERS);
+    //  setUser(DUMMY_USERS);
+
   return (
-     <div>
-      <section id='goal-form'>
-        <CourseInput onAdd={addGoalHandler}/>
-      </section>
-      <section id="goals">
-        <CourseList items = {goals} onDelete={deleteGoalHandler}/>
-      </section>
-    </div> 
+    <>
+      <AddUsers />
+      <UserList onSubmit={user}/>
+    </> 
   );
 };
 
