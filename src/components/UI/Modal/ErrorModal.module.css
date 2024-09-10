@@ -1,0 +1,48 @@
+.backdrop {
+    /* 모달창 뜨면 뒷 배경 - 위치 고정시키고 화면 꽉 채우고 투명도 준 검은색으로 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.55);
+  }
+  
+  .modal {
+    /* 모달창 - 전체 화면에서 양옆 패딩 10% 준 크기에 모달창 */
+    position: fixed;
+    top: 30vh;
+    left: 10%;
+    width: 80%;
+    z-index: 100;
+    overflow: hidden;
+    background-color: #fff;
+  }
+  
+  .header {
+    background: #4f005f;
+    padding: 1rem;
+  }
+  
+  .header h2 {
+    margin: 0;
+    color: white;
+  }
+  
+  .content {
+    padding: 1rem;
+  }
+  
+  .actions {
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  @media (min-width: 768px) {
+    .modal {
+      left: calc(50% - 20rem);
+      width: 40rem;
+    }
+  }

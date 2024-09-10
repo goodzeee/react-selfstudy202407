@@ -9,6 +9,7 @@ import CourseInput from "./components/CourseGoals/CourseInput";
 import CourseList from "./components/CourseGoals/CourseList";
 import AddUsers from "./components/Users/AddUsers";
 import UserList from "./components/Users/UserList";
+import ErrorModal from "./components/UI/Modal/ErrorModal";
 
 const App = () => {
   // 서버에서 지출항목 JSON 쌩배열을 응답 받음
@@ -119,26 +120,26 @@ const App = () => {
 
     // 💦💦💦 User 등록하는 new practice
 
-    const DUMMY_USERS = [
-      {
-        id:'u1',
-        name: '강길동',
-        age: 32
-      },
-      {
-        id: 'u2',
-        text: '조둥짝',
-        age: 26
-      },
-     ];
-     
-     const [user, setUser] = useState(DUMMY_USERS);
-    //  setUser(DUMMY_USERS);
+    const [userList, setUserList] = useState([]);
+
+    const addUserHandler = user => {
+      console.log(user);
+      
+      setUserList(prev => [
+        ...prev,
+        {
+          ...user,
+          id: Math.random().toString()
+        }
+      ]);
+      
+    };
 
   return (
     <>
-      <AddUsers />
-      <UserList onSubmit={user}/>
+      {/* <ErrorModal title={'에러 모달 제목'} message={'에러 모달 내용'}/> */}
+      <AddUsers onAddUser={addUserHandler}/>
+      <UserList users={userList}/>
     </> 
   );
 };
