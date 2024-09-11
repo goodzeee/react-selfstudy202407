@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styles from './AddUsers.module.css';
 import Button from '../UI/Button';
 import Card from '../UI/Card';
@@ -8,27 +8,37 @@ const AddUsers = ({onAddUser}) => {
     // 에러 상태 관리(제목, 내용) - 에러 모달창 나오는 조건문 부여를 위한 !
     const [error, setError] = useState(null);
 
-    const [userValue, setUserValue] = useState({
-        username: '',
-        age: '',
-    });
+    // ❕❕useRef로 DOM 조작하기 
+    const usernameRef = useRef();
+    const ageRef = useRef();
 
-    const usernameChangeHandler = (e) => {
-        setUserValue((prevUserValue) => ({
-            ...prevUserValue,
-            username: e.target.value,
-        }));
-    };
-    const ageChangeHandler = (e) => {
-        setUserValue((prevUserValue) => ({
-            ...prevUserValue,
-            age: e.target.value,
-        }));
-    };
+    // const [userValue, setUserValue] = useState({
+    //     username: '',
+    //     age: '',
+    // });
+
+    // const usernameChangeHandler = (e) => {
+    //     setUserValue((prevUserValue) => ({
+    //         ...prevUserValue,
+    //         username: e.target.value,
+    //     }));
+    // };
+    // const ageChangeHandler = (e) => {
+    //     setUserValue((prevUserValue) => ({
+    //         ...prevUserValue,
+    //         age: e.target.value,
+    //     }));
+    // };
 
     // 유저 등록 함수
     const userSubmitHandler = (e) => {
         e.preventDefault();
+
+        const userValue = {
+            // 위에 useRef()로 만들어 놓은 현재값 사용하는 방법
+            username: usernameRef.current.value,
+            age: ageRef.current.value
+        };
 
         // 입력값 검증 - 1. 공백일 때
         if (userValue.username.trim() === '' || userValue.age.trim() === '') {
@@ -51,10 +61,10 @@ const AddUsers = ({onAddUser}) => {
     // App.js에서 유저 추가하는 객체 가져오기
     onAddUser(userValue);
     // 추가되면 공백으로 세팅 마무리
-    setUserValue({
-        username: '',
-        age: '',
-    });
+    // setUserValue({
+    //     username: '',
+    //     age: '',
+    // });
 }
 
 // 하위 컴포넌트 ErrorModal에게 모달을 닫는 조건을 수행하는 함수 전달
@@ -73,15 +83,17 @@ const modalCloseHandler = () => {
             <input
             id='username'
             type='text'
-            onChange={usernameChangeHandler}
-            value={userValue.username}
+            ref={usernameRef}
+            //onChange={usernameChangeHandler}
+            //value={userValue.username}
             />
             <label htmlFor='age'>나이</label>
             <input
             id='age'
             type='number'
-            onChange={ageChangeHandler}
-            value={userValue.age}
+            ref={ageRef}
+            //onChange={ageChangeHandler}
+            //value={userValue.age}
             />
             <Button type='submit'>가입하기</Button>
         </form>

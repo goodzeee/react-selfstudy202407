@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ExpenseList from "./components/Expenses/ExpenseList";
 import Greet from "./components/Greet";
 import Counter from "./components/practice/Counter";
@@ -122,8 +122,14 @@ const App = () => {
 
     const [userList, setUserList] = useState([]);
 
+    // 💡💡 리렌더링될 때 변수에 기억을 유지하고 싶을 때 사용 !
+    const count = useRef(1);
+    console.log('count: ', count);
+    
     const addUserHandler = user => {
-      console.log(user);
+      // console.log(user);
+      count.current++;
+      console.log('count.current: ', count.current);
       
       setUserList(prev => [
         ...prev,
