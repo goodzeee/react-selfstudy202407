@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import Card from '../Card';
 import Button from '../Button';
 import styles from './ErrorModal.module.css';
-// import Portal from '../Portal/Portal';
+import Portal from '../Portal/Portal';
 
 // return문에 있는 백드롭 태그 추출하기
 const BackDrop = ({ onClose }) => {
@@ -35,7 +35,16 @@ const ModalOverlay = ({ title, message, onClose }) => {
 const ErrorModal = ({ title, message, onClose }) => {
   return (
     <>
-       {
+    {/* 모달 포탈 페이지에서 ReactDOM 만들어서 모달 포탈 전용 태그를 여러곳에서 가져와 사용할 수 있게 */}
+       <Portal destId='backdrop-root'>
+        <BackDrop onClose={onClose}/>
+       </Portal>
+       
+       <Portal destId='overlay-root'>
+        <ModalOverlay title={title} message={message} onClose={onClose}/>
+       </Portal>
+
+       {/* {
         ReactDOM.createPortal(
           <BackDrop onClose={onClose} />,
           // 백드롭을 index.html에 만든 'backdrop-root' 아이디에 태워 보낸다 (포탈)
@@ -47,7 +56,7 @@ const ErrorModal = ({ title, message, onClose }) => {
           <ModalOverlay title={title} message={message} onClose={onClose}/>,
           document.getElementById('overlay-root')
         )
-      }
+      } */}
 
     {/* ❕ 리팩토링 : 한 파일에서 만든 태그 가져와서 특정 위치에 return 할 수 있음 */}
     {/* <BackDrop onClose={onClose} />
