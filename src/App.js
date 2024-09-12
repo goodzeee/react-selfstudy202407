@@ -152,7 +152,7 @@
 
 // export default App;
 
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './App.css';
 import Home from './components/SideEffect/Home';
 import MainHeader from './components/SideEffect/MainHeader';
@@ -163,13 +163,24 @@ const App = () => {
   // 현재 로그인 상태를 체크하는 변수
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // localStorage에서 login-flag를 꺼냄
-  const storedLoginFlag = localStorage.getItem('login-flag');
-  //💥 로그인 검사를 초기에 1번만 수행 - 아닐시 무한 렌더링 문제 발생
-  if (storedLoginFlag === '1') {
-    // 상태변수가 setter로 변경되면 리액트는 변경감지 후 바로 리렌더링을 수행함 !
-    setIsLoggedIn(true);
-  }
+  // // localStorage에서 login-flag를 꺼냄
+  // const storedLoginFlag = localStorage.getItem('login-flag');
+  // //💥 로그인 검사를 초기에 1번만 수행 - 아닐시 무한 렌더링 문제 발생
+  // if (storedLoginFlag === '1') {
+  //   // 상태변수가 setter로 변경되면 리액트는 변경감지 후 바로 리렌더링을 수행함 !
+  //   setIsLoggedIn(true);
+  // }
+
+  // 위 side effect 처리를 위한 함수
+  // ❕❕useEffect는 기본적으로 컴포넌트 렌더링시 단 한 번만 호출 !
+  useEffect(() => {
+    console.log('로그인 검사 수행 !');
+    const storedLoginFlag = localStorage.getItem('login-flag');
+
+    if (storedLoginFlag === '1') {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   // 서버 통신은 중앙집중 관리가 중요함
   const loginHandler = (email, password) => {
@@ -179,9 +190,14 @@ const App = () => {
     setIsLoggedIn(true);
   };
 
+  const logoutHandler = () => {
+    localStorage.removeItem('login-flag');
+    setIsLoggedIn(false);
+  };
+
   return (
     <>
-    <MainHeader />
+    <MainHeader onLogout={logoutHandler}/>
     <main>
       {isLoggedIn ? <Home /> : <Login onLogin={loginHandler}/>}
     </main>
