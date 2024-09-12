@@ -12,6 +12,8 @@ code {
     monospace;
 } */
 
+/* SideEffect 로그인 practice ! */
+
 * {
   box-sizing: border-box;
 }
@@ -22,5 +24,9 @@ html {
 
 body {
   margin: 0;
-  background: #1c1c1c;
+  /* background: #1c1c1c; */
+}
+
+main {
+  margin-top: 6rem;
 }
