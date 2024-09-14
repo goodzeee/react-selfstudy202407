@@ -132,7 +132,7 @@ const Login = ({ onLogin }) => {
 
     // clean up함수는 컴포넌트가 업데이트되거나 사라지기 전에 실행
     return () => {
-      // console.log('cleanup: ', enteredEmail);
+      console.log('clean up !!');
       clearTimeout(timer);
     };
   }, [emailIsValid, passwordIsValid]);
@@ -141,12 +141,21 @@ const Login = ({ onLogin }) => {
 
   // 🔎🔍 1. [의존성 값]이 변할 때 {사이드 이펙트 실행} 2. []빈 배열시 렌더링시 최초 한 번만 보여줌
   // 3. [] 생략시 실행마다 보여줌
-  // useEffect(() => {
-  //   console.log('useEffect calll in Login.js');
-  //   setFormIsValid(
-  //     enteredPassword.trim().length > 6 && enteredEmail.includes('@')
-  //   ) 🔎[] -> 비밀번호와 이메일 입력할 때마다 {} 검증 실행해주는 !
-  // }, [entteredPassword, enteredEmail]);
+  useEffect(() => {
+    setTimeout(() => {
+
+    console.log('useEffect calll in Login.js');
+    setFormIsValid(
+      enteredPassword.trim().length > 6 && enteredEmail.includes('@')
+    ) 
+    // 🔎[] -> 비밀번호와 이메일 입력할 때마다 {} 검증 실행해주는 !
+  }, 3000);
+
+  // clean up함수는 컴포넌트가 업데이트되거나 사라지기 전에 실행
+  return () => {
+    console.log('clean up !!');
+  };
+}, [entteredPassword, enteredEmail]);
 
   return (
     <Card className={styles.login}>
