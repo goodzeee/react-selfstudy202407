@@ -2,9 +2,9 @@ import React from 'react'
 import styles from './Navigation.module.css';
 import AuthContext from '../../store/auth-context';
 
-const Navigaion = ({onLogout}) => {
+const Navigaion = () => {
 
-    const loginPage = (
+    const loginPage = (onLogout) => (
         <>
         <li>
                 <a href='/'>
@@ -32,11 +32,11 @@ const Navigaion = ({onLogout}) => {
   return (
     // 로그인 상태 데이터 제공해주는 App.js에서 가져와 소비하는 페이지 !
     <AuthContext.Consumer>
-        {({isLoggedIn}) => {
+        {({isLoggedIn, onLogout}) => {
             return (
     <nav className={styles.nav}>
         <ul>
-            {isLoggedIn ? loginPage : anonymousPage}
+            {isLoggedIn ? loginPage(onLogout) : anonymousPage}
         </ul>
     </nav>
   );

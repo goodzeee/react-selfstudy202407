@@ -6,7 +6,8 @@ import React from "react"
 // 데이터 값은 타입 기본값을 명시
 const AuthContext = React.createContext(
     {
-        isLoggedIn: false // isLoggendIn 관리할 전용 파일 !
+        isLoggedIn: false, // isLoggendIn로그인 관리할 전용 파일 !
+        onLogout: () => {}, // 로그아웃 핸들러 관리할 - 함수 타입 기본값 명시
     }
 );
 
