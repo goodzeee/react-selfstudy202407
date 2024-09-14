@@ -157,6 +157,7 @@ import './App.css';
 import Home from './components/SideEffect/Home';
 import MainHeader from './components/SideEffect/MainHeader';
 import Login from './components/SideEffect/Login';
+import AuthContext from './store/auth-context';
 
 const App = () => {
 
@@ -190,18 +191,23 @@ const App = () => {
     setIsLoggedIn(true);
   };
 
+  // 로그아웃 기능 함수
   const logoutHandler = () => {
     localStorage.removeItem('login-flag');
     setIsLoggedIn(false);
   };
 
   return (
-    <>
+    // 로그인 관련 상태데이터를 중앙집중 관리하는 파일을 가져와 제공해주는 페이지 !
+    <AuthContext.Provider value={{
+      isLoggedIn: isLoggedIn,
+      onLogout: logoutHandler // 로그아웃 핸들러 제공 !
+    }}>
     <MainHeader onLogout={logoutHandler}/>
     <main>
       {isLoggedIn ? <Home /> : <Login onLogin={loginHandler}/>}
     </main>
-    </>
+    </AuthContext.Provider>
   );
 };
 

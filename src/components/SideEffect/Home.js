@@ -1,12 +1,25 @@
 import React from 'react'
 import Card from '../UI/Card';
 import styles from './Home.module.css';
+import Button from '../UI/Button';
+import AuthContext from '../../store/auth-context';
+
 
 const Home = () => {
   return (
-    <Card className={styles.home}>
-        <h1>Welcome back !</h1>
-    </Card>
+    <AuthContext.Consumer>
+      {
+        (ctx) => {
+          // console.log('ctx: ', ctx);
+          return (
+            <Card className={styles.home}>
+              <h1>Welcome back !</h1>
+              {/* 로그아웃 기능 Context로 사용해보기 */}
+              <Button onClick={ctx.onLogout}>Logout</Button>
+            </Card>
+          ) 
+        }}
+    </AuthContext.Consumer>
   );
 };
 
