@@ -4,7 +4,7 @@ import AuthContext from '../../store/auth-context';
 
 const Navigaion = ({onLogout}) => {
 
-    let renderPage = (
+    const loginPage = (
         <>
         <li>
                 <a href='/'>
@@ -27,16 +27,16 @@ const Navigaion = ({onLogout}) => {
     // if (!isLoggedIn) {
     //     renderPage = <li><button>SignUp</button></li>
     // }
+    const anonymousPage = <li><button>SignUp</button></li>
 
   return (
     // 로그인 상태 데이터 제공해주는 App.js에서 가져와 소비하는 페이지 !
     <AuthContext.Consumer>
-        {context => {
-            console.log(context);
+        {({isLoggedIn}) => {
             return (
     <nav className={styles.nav}>
         <ul>
-            
+            {isLoggedIn ? loginPage : anonymousPage}
         </ul>
     </nav>
   );
