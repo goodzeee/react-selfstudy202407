@@ -14,6 +14,7 @@ const Home = () => {
           return (
             <Card className={styles.home}>
               <h1>Welcome back !</h1>
+              {/* 로그아웃 기능 Context로 사용해보기 */}
               <Button onClick={ctx.onLogout}>Logout</Button>
             </Card>
           ) 
