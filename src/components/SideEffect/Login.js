@@ -4,7 +4,7 @@ import Card from '../UI/Card';
 import styles from './Login.module.css';
 import Button from '../UI/Button';
 
-// 리듀서 함수
+// 💡💡리듀서 함수
 /*
   이 컴포넌트의 모든 상태와 상태변경을 중앙제어하는 함수
   컴포넌트 내부 데이터를 사용하지 않고 상태에만 집중하므로
@@ -19,9 +19,9 @@ import Button from '../UI/Button';
 */
 
 const emailReducer = (state, action) => {
-  // console.log('email reducer call!!');
-  // console.log('state: ', state);  // 변경 전 상태객체
-  // console.log('action: ', action); // 지금 상태변경이 일어난 객체
+  console.log('email reducer call!!');
+  console.log('state: ', state);  // 변경 전 상태객체
+  console.log('action: ', action); // 지금 상태변경이 일어난 객체
 
   if (action.type === 'USER_INPUT') {
     return { 
@@ -38,6 +38,7 @@ const emailReducer = (state, action) => {
 
 const passwordReducer = (state, action) => {
 
+  // 블러처리를 위한 액션에 따라 분기해주는 조건문 !
   if (action.type === 'USER_INPUT') {
     return { 
       inputValue: action.val,
@@ -57,12 +58,13 @@ const Login = ({ onLogin }) => {
   // email reducer로 이메일 상태관리하기
   /*
     param1: 위에서 만든 리듀서 함수
-    param2: 상태값의 초기값
+    param2: 관리할 상태값의 초기값
     return: 리듀서를 관리하는 배열
         [0]: 이메일 관련 상태값
         [1]: 상태를 변경할 수 있는 함수 
   */
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
+    // 입력값, 검증값 상태 초기값으로 세팅하여 reducer로 관리하기 위한 !
     inputValue: '',
     isValid: null,
   });
@@ -85,7 +87,7 @@ const Login = ({ onLogin }) => {
 
     // param1: 리듀서 함수의 action에 전달할 내용
     dispatchEmail({
-      type: 'USER_INPUT',
+      type: 'USER_INPUT', 
       val: e.target.value
     });
 
@@ -115,6 +117,7 @@ const Login = ({ onLogin }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     // App.js에서 받은 로그인핸들러 호출
+    // useReducer로 이메일, 비번 상태값 호출
     onLogin(emailState.inputValue, passwordState.inputValue);
   };
 
@@ -132,12 +135,30 @@ const Login = ({ onLogin }) => {
 
     // clean up함수는 컴포넌트가 업데이트되거나 사라지기 전에 실행
     return () => {
-      // console.log('cleanup: ', enteredEmail);
+      console.log('clean up !!');
       clearTimeout(timer);
     };
   }, [emailIsValid, passwordIsValid]);
 
   // console.log('render: ', enteredEmail);
+
+  // 🔎🔍 1. [의존성 값]이 변할 때 {사이드 이펙트 실행} 2. []빈 배열시 렌더링시 최초 한 번만 보여줌
+  // 3. [] 생략시 실행마다 보여줌
+//   useEffect(() => {
+//     setTimeout(() => {
+
+//     console.log('useEffect calll in Login.js');
+//     setFormIsValid(
+//       enteredPassword.trim().length > 6 && enteredEmail.includes('@')
+//     ) 
+//     // 🔎[] -> 비밀번호와 이메일 입력할 때마다 {} 검증 실행해주는 !
+//   }, 3000);
+
+//   // clean up함수는 컴포넌트가 업데이트되거나 사라지기 전에 실행
+//   return () => {
+//     console.log('clean up !!');
+//   };
+// }, [entteredPassword, enteredEmail]);
 
   return (
     <Card className={styles.login}>
