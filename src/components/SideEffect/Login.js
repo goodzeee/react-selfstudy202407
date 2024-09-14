@@ -139,6 +139,15 @@ const Login = ({ onLogin }) => {
 
   // console.log('render: ', enteredEmail);
 
+  // 🔎🔍 1. [의존성 값]이 변할 때 {사이드 이펙트 실행} 2. []빈 배열시 렌더링시 최초 한 번만 보여줌
+  // 3. [] 생략시 실행마다 보여줌
+  // useEffect(() => {
+  //   console.log('useEffect calll in Login.js');
+  //   setFormIsValid(
+  //     enteredPassword.trim().length > 6 && enteredEmail.includes('@')
+  //   ) 🔎[] -> 비밀번호와 이메일 입력할 때마다 {} 검증 실행해주는 !
+  // }, [entteredPassword, enteredEmail]);
+
   return (
     <Card className={styles.login}>
       <form onSubmit={submitHandler}>
