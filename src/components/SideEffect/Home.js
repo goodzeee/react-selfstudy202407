@@ -10,7 +10,7 @@ const Home = () => {
     <AuthContext.Consumer>
       {
         (ctx) => {
-          console.log('ctx: ', ctx);
+          // console.log('ctx: ', ctx);
           return (
             <Card className={styles.home}>
               <h1>Welcome back !</h1>
