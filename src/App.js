@@ -216,9 +216,7 @@ import Header from './Food/Layout/Header';
 
 const App = () => {
   return (
-    <Header>
-      
-    </Header>
+    <Header></Header>
   )
 }
 
