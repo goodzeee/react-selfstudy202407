@@ -152,17 +152,18 @@
 
 // export default App;
 
-import React, {useEffect, useRef, useState} from 'react';
-import './App.css';
-import Home from './components/SideEffect/Home';
-import MainHeader from './components/SideEffect/MainHeader';
-import Login from './components/SideEffect/Login';
-import AuthContext from './store/auth-context';
+// ❕❕로그인 처리 Practice !
+// import React, {useEffect, useRef, useState} from 'react';
+// import './App.css';
+// import Home from './components/SideEffect/Home';
+// import MainHeader from './components/SideEffect/MainHeader';
+// import Login from './components/SideEffect/Login';
+// import AuthContext from './store/auth-context';
 
-const App = () => {
+// const App = () => {
 
   // 현재 로그인 상태를 체크하는 변수
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // // localStorage에서 login-flag를 꺼냄
   // const storedLoginFlag = localStorage.getItem('login-flag');
@@ -174,41 +175,57 @@ const App = () => {
 
   // 위 side effect 처리를 위한 함수
   // ❕❕useEffect는 기본적으로 컴포넌트 렌더링시 단 한 번만 호출 !
-  useEffect(() => {
-    console.log('로그인 검사 수행 !');
-    const storedLoginFlag = localStorage.getItem('login-flag');
+//   useEffect(() => {
+//     console.log('로그인 검사 수행 !');
+//     const storedLoginFlag = localStorage.getItem('login-flag');
 
-    if (storedLoginFlag === '1') {
-      setIsLoggedIn(true);
-    }
-  }, []);
+//     if (storedLoginFlag === '1') {
+//       setIsLoggedIn(true);
+//     }
+//   }, []);
 
-  // 서버 통신은 중앙집중 관리가 중요함
-  const loginHandler = (email, password) => {
-    // 💡💡 쿠키 : 클라이언트한테 저장 남기기 + 세션 : 서버에 저장 남기기 = 토큰 : 둘 다 !
-    // 로그인의 증거로 클라이언트에 1이라는 숫자를 기록
-    localStorage.setItem('login-flag', '1');
-    setIsLoggedIn(true);
-  };
+//   // 서버 통신은 중앙집중 관리가 중요함
+//   const loginHandler = (email, password) => {
+//     // 💡💡 쿠키 : 클라이언트한테 저장 남기기 + 세션 : 서버에 저장 남기기 = 토큰 : 둘 다 !
+//     // 로그인의 증거로 클라이언트에 1이라는 숫자를 기록
+//     localStorage.setItem('login-flag', '1');
+//     setIsLoggedIn(true);
+//   };
 
-  // 로그아웃 기능 함수
-  const logoutHandler = () => {
-    localStorage.removeItem('login-flag');
-    setIsLoggedIn(false);
-  };
+//   // 로그아웃 기능 함수
+//   const logoutHandler = () => {
+//     localStorage.removeItem('login-flag');
+//     setIsLoggedIn(false);
+//   };
 
+//   return (
+//     // 로그인 관련 상태데이터를 중앙집중 관리하는 파일을 가져와 제공해주는 페이지 !
+//     <AuthContext.Provider value={{
+//       isLoggedIn: isLoggedIn,
+//       onLogout: logoutHandler // 로그아웃 핸들러 제공 !
+//     }}>
+//     <MainHeader onLogout={logoutHandler}/>
+//     <main>
+//       {isLoggedIn ? <Home /> : <Login onLogin={loginHandler}/>}
+//     </main>
+//     </AuthContext.Provider>
+//   );
+// };
+
+//❕❕ Cart 장바구니 practice !
+import React from 'react'
+import Header from './Food/Layout/Header';
+import Meals from './Food/Meals/Meals';
+
+const App = () => {
   return (
-    // 로그인 관련 상태데이터를 중앙집중 관리하는 파일을 가져와 제공해주는 페이지 !
-    <AuthContext.Provider value={{
-      isLoggedIn: isLoggedIn,
-      onLogout: logoutHandler // 로그아웃 핸들러 제공 !
-    }}>
-    <MainHeader onLogout={logoutHandler}/>
-    <main>
-      {isLoggedIn ? <Home /> : <Login onLogin={loginHandler}/>}
-    </main>
-    </AuthContext.Provider>
-  );
-};
+    <>
+    <Header></Header>
+    <div id='main'>
+      <Meals />
+    </div>
+    </>
+  )
+}
 
 export default App
