@@ -152,6 +152,7 @@
 
 // export default App;
 
+// ❕❕로그인 처리 Practice !
 // import React, {useEffect, useRef, useState} from 'react';
 // import './App.css';
 // import Home from './components/SideEffect/Home';
@@ -211,12 +212,19 @@
 //   );
 // };
 
+//❕❕ Cart 장바구니 practice !
 import React from 'react'
 import Header from './Food/Layout/Header';
+import Meals from './Food/Meals/Meals';
 
 const App = () => {
   return (
+    <>
     <Header></Header>
+    <div id='main'>
+      <Meals />
+    </div>
+    </>
   )
 }
 
