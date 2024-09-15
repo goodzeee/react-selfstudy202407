@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from './Navigation.module.css';
 import AuthContext from '../../store/auth-context';
 
@@ -29,20 +29,16 @@ const Navigaion = () => {
     // }
     const anonymousPage = <li><button>SignUp</button></li>
 
-  return (
-    // 로그인 상태 데이터 제공해주는 App.js에서 가져와 소비하는 페이지 !
-    <AuthContext.Consumer>
-        {({isLoggedIn, onLogout}) => {
-            return (
-    <nav className={styles.nav}>
-        <ul>
-            {isLoggedIn ? loginPage(onLogout) : anonymousPage}
-        </ul>
-    </nav>
-  );
-}}
-    </AuthContext.Consumer>
-);
+    // 복잡한 Consumer 사용 대신 useContext(); 로 사용하기
+    const {isLoggedIn, onLogout} = useContext(AuthContext);
+
+    return (
+        <nav className={styles.nav}>
+            <ul>
+                {isLoggedIn ? loginPage(onLogout) : anonymousPage}
+            </ul>
+        </nav>
+      );
 };
 
 export default Navigaion
