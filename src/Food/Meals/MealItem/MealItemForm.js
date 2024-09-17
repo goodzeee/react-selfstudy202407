@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react';
-import Input from '../../../UI/Input/Input';
 import styles from './MealItemForm.module.scss';
+import Input from '../../../components/UI/Input/Input';
 
 const MealItemForm = ( props ) => {
 
   return (
     <form className={styles.form} >
       <Input
-        ref={inputRef}
+        // ref={inputRef}
         label='수량'
         inputAttr={{
           id: 'amount_' + props.id,
