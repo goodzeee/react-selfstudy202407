@@ -216,11 +216,13 @@
 import React from 'react'
 import Header from './Food/Layout/Header';
 import Meals from './Food/Meals/Meals';
+import Cart from './Food/Cart/Cart';
 
 const App = () => {
   return (
     <>
-    <Header></Header>
+    <Cart />
+    <Header />
     <div id='main'>
       <Meals />
     </div>
