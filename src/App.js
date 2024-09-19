@@ -217,16 +217,20 @@ import React from 'react'
 import Header from './Food/Layout/Header';
 import Meals from './Food/Meals/Meals';
 import Cart from './Food/Cart/Cart';
+import CartContext from './store/cart-context';
+import CartProvider from './store/CartProvider';
+
+// provider 함수 등 많아질거 같아서, App 대신 제공자 컴포넌트 만들어서 가져와서 사용하기
 
 const App = () => {
   return (
-    <>
-    <Cart />
-    <Header />
-    <div id='main'>
-      <Meals />
-    </div>
-    </>
+    <CartProvider>
+     <Cart />
+     <Header />
+     <div id='main'>
+       <Meals />
+     </div>
+    </CartProvider>
   )
 }
 
