@@ -5,7 +5,7 @@ import styles from './Header.module.scss'
 import mealsImg from '../../assets/img/meals.jpg'
 import HeaderCartButton from './HeaderCartButton';
 
-const Header = () => {
+const Header = ({onShowCart}) => {
     // scss 모듈로 스타일링 리팩토링 !
     const {header, 'main-image': mainImage} = styles;
 
@@ -13,7 +13,7 @@ const Header = () => {
     <>
     <header className={header}>
         <h1>React Meals</h1>
-        <HeaderCartButton />
+        <HeaderCartButton onShow={onShowCart}/>
     </header>
     <div className={mainImage}>
         <img src={mealsImg} alt='meals image'/>

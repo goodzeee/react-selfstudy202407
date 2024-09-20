@@ -17,7 +17,7 @@ const DUMMY_CART = [
       },
     ];
 
-    const Cart = ({  }) => {
+    const Cart = ({ onClose }) => {
       const {
           'cart-items': cartItemStyle,
           total,
@@ -27,7 +27,7 @@ const DUMMY_CART = [
         } = styles;
 
         return(
-            <CartModal>
+            <CartModal onClose={onClose}>
               {/* 주문 내역 */}
               <ul className={cartItemStyle}>
                 {DUMMY_CART.map((cartItem) => (
@@ -43,7 +43,7 @@ const DUMMY_CART = [
               <div className={actions}>
                 <button
                   className={btnAlt}
-                //   onClick={onClose}
+                  onClick={onClose}
                   >
                   닫기
                 </button>
