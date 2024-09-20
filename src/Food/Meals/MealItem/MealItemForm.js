@@ -2,19 +2,21 @@ import React, { useRef, useState } from 'react';
 import styles from './MealItemForm.module.scss';
 import Input from '../../../components/UI/Input/Input';
 
-const MealItemForm = ( props ) => {
+const MealItemForm = ( {id, onAddToCart} ) => {
 
   // 선택한 수량 값
-  const [amount, setAmount] = useState(0);
+  // const [amount, setAmount] = useState(0);
 
   // 선택한 수량 값 가져오기
   const inputRef = useRef();
 
   const submitHandler = e => {
     e.preventDefault();
-    const selectedValue = inputRef.current.value;
-    console.log('select: ', selectedValue);
+    // 현재 선택된 상품에 수량 값 ! - MealItem에 보낼거 !
+    const amount = inputRef.current.value;
+    console.log('amount: ', amount);
     
+    onAddToCart(amount);
   };
 
   return (
@@ -25,7 +27,7 @@ const MealItemForm = ( props ) => {
         ref={inputRef}
         label='수량'
         inputAttr={{
-          id: 'amount_' + props.id,
+          id: 'amount_' + id,
           type: 'number',
           min: '1',
           max: '5',
