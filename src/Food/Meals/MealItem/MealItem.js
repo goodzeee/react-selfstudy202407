@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
 import styles from './MealItem.module.scss';
 import MealItemForm from './MealItemForm';
-// import CartContext from '../../../../store/cart-context';
+import CartContext from '../../../store/cart-context';
 
 // MealItemForm 자식한테 수량 정보만 끌어오면 장바구니에 보낼 수량 정보 완성됨 !!
 const MealItem = ({id, price, description, name}) => {
+
+  // Context에서 중앙관리되는 데이터들을 한 번에 소비할 수 있는 hook !
+  const {addItem} = useContext(CartContext);
 
   const { meal, description: desc, price: priceStyle } = styles;
 
@@ -20,8 +23,8 @@ const MealItem = ({id, price, description, name}) => {
       amount: +amount,
       price: price,
     }
-    console.log('item: ', item);
-    
+    console.log('action: ', item);
+    addItem(item);
   };
 
   return (
