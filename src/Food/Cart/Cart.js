@@ -22,8 +22,8 @@ import CartItem from './CartItem';
     const Cart = ({ onClose }) => {
 
       // CartProvider에서 CartContext에 제공할 provider 3개를 갖고 있는 것 ! 
-      // CartContext에 장바구니 배열만 필요해 !
-      const {cartItems} = useContext(CartContext);
+      // CartContext에 장바구니 배열만 필요해 ! + 장바구니 주문 총액
+      const {cartItems, totalPrice} = useContext(CartContext);
 
       const {
           'cart-items': cartItemStyle,
@@ -49,7 +49,7 @@ import CartItem from './CartItem';
               </ul>
               <div className={total}>
                 <span>주문 총액</span>
-                <span>58,000원</span>
+                <span>{new Intl.NumberFormat('ko-KR').format(totalPrice)}원</span>
               </div>
               <div className={actions}>
                 <button

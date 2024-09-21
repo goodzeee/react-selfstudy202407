@@ -4,7 +4,7 @@ import styles from './CartItem.module.scss';
 // 장바구니 하나에 정보를 갖는 컴포넌트 !
 const CartItem = ({cart}) => {
 
-    const {name, price, amount} = cart;
+    const {id, name, price, amount} = cart;
 
     // scss 리팩토링
     const {

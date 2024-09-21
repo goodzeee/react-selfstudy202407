@@ -1,11 +1,12 @@
 import React, {useReducer} from 'react'
 import CartContext from './cart-context'
 
-// 장바구니 기본값 - 배열, 객체 관리하기 Good !
+// 초기 장바구니 중앙관리 상태값 (state) - 배열, 객체 관리하기 Good !
 const defaultState = {
     //💡💡 리듀서 사용 이유 ? : 상태관리를 종합관리하기 위하여 모든 상태변수를 여기다 나열하면 된다 !
 
-    items: [] // 장바구니 배열
+    items: [], // 장바구니 배열 상태값
+    totalPrice: 0, // 총액 상태값
 };
 
 // reducer : 여러가지 복잡한 상태관리를 단순화시키며 중앙집중화한다.
@@ -20,9 +21,15 @@ const cartReducer = (state, action) => {
 // 💡💡계속 추가상태가 생기면 else if로 추가해서 중앙집중화 !!
     if (action.type === 'ADD') { // 장바구니에 추가하는 액션 
 
+        // 장바구니 배열상태 업데이트
+        const updateCartItems = [...state.items, action.value]
+        // 총액 상태 업데이트 - 업데이트 전 가격 + 새로 추가한 상품 가격 * 수량
+        const updatePrice = state.totalPrice + (action.value.price * action.value.amount);
+
         return {
             // 업데이트 이전 상태인 state에 item을 복사한 뒤 새로운 action => item인 value를 붙여줌
-            items: [...state.items, action.value]
+            items: updateCartItems,
+            totalPrice: updatePrice,
         }; // 새로운 상태 - useState같은 느낌
     } else if (action.type === 'REMOVE') { // 장바구니에 삭제하는 액션
 
@@ -58,6 +65,8 @@ const CartProvider = ({children}) => {
         cartItems: cartState.items,  // 업데이트 후에 장바구니 상태값
         addItem: addItemHandler,  // 상태를 업데이트하는 함수
         removeItem: id => {}, // "
+
+        totalPrice: cartState.totalPrice,
     };
 
   return (
