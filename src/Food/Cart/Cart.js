@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import styles from './Cart.module.scss';
 import CartModal from './CartModal';
 import CartContext from '../../store/cart-context';
+import CartItem from './CartItem';
 
 // const DUMMY_CART = [
 //       {
@@ -37,9 +38,13 @@ import CartContext from '../../store/cart-context';
               {/* 주문 내역 */}
               <ul className={cartItemStyle}>
                 {cartItems.map((cartItem) => (
-                  <li key={cartItem.id}>
-                    {cartItem.name}
-                  </li>
+                  // {/*  <li key={cartItem.id}>
+                  //    {cartItem.name}
+                  //  </li> */}
+                  <CartItem 
+                  key={cartItem.id}
+                  cart={cartItem}
+                  />
                 ))}
               </ul>
               <div className={total}>
