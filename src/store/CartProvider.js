@@ -7,6 +7,7 @@ const defaultState = {
 
     items: [], // 장바구니 배열 상태값
     totalPrice: 0, // 총액 상태값
+    totalAmount: 0, // 장바구니 수량 상태값
 };
 
 // reducer : 여러가지 복잡한 상태관리를 단순화시키며 중앙집중화한다.
@@ -26,10 +27,13 @@ const cartReducer = (state, action) => {
         // 총액 상태 업데이트 - 업데이트 전 가격 + 새로 추가한 상품 가격 * 수량
         const updatePrice = state.totalPrice + (action.value.price * action.value.amount);
 
+        const updateAmount = state.totalAmount + action.value.amount;
+
         return {
             // 업데이트 이전 상태인 state에 item을 복사한 뒤 새로운 action => item인 value를 붙여줌
             items: updateCartItems,
             totalPrice: updatePrice,
+            totalAmount: updateAmount,
         }; // 새로운 상태 - useState같은 느낌
     } else if (action.type === 'REMOVE') { // 장바구니에 삭제하는 액션
 
@@ -67,6 +71,7 @@ const CartProvider = ({children}) => {
         removeItem: id => {}, // "
 
         totalPrice: cartState.totalPrice,
+        totalAmount: cartState.totalAmount,
     };
 
   return (

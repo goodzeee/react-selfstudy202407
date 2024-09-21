@@ -10,6 +10,7 @@ const CartContext = createContext({
 
     // 주문 총액을 장바구니, 결제창 등 다양한 곳에서 사용하니 중앙에서 따로 관리하는게 좋으니 추가 !
     totalPrice: 0,
+    totalAmount: 0,
 });
 
 export default CartContext;
