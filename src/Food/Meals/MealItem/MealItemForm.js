@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import styles from './MealItemForm.module.scss';
 import Input from '../../../components/UI/Input/Input';
 
+// 선택한 상품 수량 정보만 갖고 있음.
 const MealItemForm = ( {id, onAddToCart} ) => {
 
   // 선택한 수량 값
