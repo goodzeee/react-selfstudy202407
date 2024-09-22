@@ -16,7 +16,7 @@ const HeaderCartButton = ({onShow}) => {
     const {button, icon, badge, bump} = styles;
 
     useEffect(() => {
-      // 맨처음 화면에서는 애니메이션 효과 안주게
+      // 맨처음 화면에서는 애니메이션 효과 안주기 
       if (cartItems.length === 0) return;
 
       setIsBump(true);
@@ -27,7 +27,7 @@ const HeaderCartButton = ({onShow}) => {
       }, 300);  
 
       // 연속으로 눌렀을 때 애니메이션 버벅이는거 없애는 최적화 작업 !
-      return() => clearTimeout(timer);
+      return () => clearTimeout(timer);
 
     }, [cartItems]);
     
