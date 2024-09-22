@@ -1,5 +1,6 @@
 import React, {useReducer} from 'react'
 import CartContext from './cart-context'
+import { type } from '@testing-library/user-event/dist/type';
 
 // 초기 장바구니 중앙관리 상태값 (state) - 배열, 객체 관리하기 Good !
 const defaultState = {
@@ -50,9 +51,29 @@ const cartReducer = (state, action) => {
             totalPrice: updatePrice,
             // totalAmount: updateAmount,
         }; // 새로운 상태 - useState같은 느낌
-    } else if (action.type === 'REMOVE') { // 장바구니에 삭제하는 액션
+    } else if (action.type === 'REMOVE') { // 장바구니에 제거
 
-        return null;
+        // 기존 장바구니 배열 사본
+        const existingItems = [...state.items]
+        // 제거 or 수량감소 대상의 인덱스 탐색
+        const index = existingItems.findIndex(item => item.id === action.value);
+
+        let updatedItems;
+        // 기존에 장바구니의 해당 아이템의 수량이 1인경우 - 장바구니배열에서 제거
+        if (index !== -1 && existingItems[index].amount === 1) {
+            updatedItems = existingItems.filter(item => item.id !== action.value);
+        } else { // 1보다 큰 경우 - 수량 -1개 내려줌
+            existingItems[index].amount--;
+            updatedItems = [...existingItems];
+        }
+        
+        // 총액 계산 - -1 하는 특정 상품에 인덱스 아이디 가격을 주문총액에서 차감해주기 !
+        const updatedPrice = state.totalPrice - existingItems[index].price;
+
+        return {
+            items: updatedItems,
+            totalPrice: updatedPrice,
+        };
     }
     return defaultState; // 아무것도 안했을 때 장바구니 기본값
 };
@@ -77,14 +98,22 @@ const CartProvider = ({children}) => {
             // 전달할 item => value
             value: item,
 
-        })
+        });
+    };
+
+    const removeItemHandler = id => {
+
+        dispatchCartAction({
+            type: 'REMOVE',
+            value: id,
+        });
     };
 
     // Provider가 실제로 관리할 상태들의 구체적인 내용들 - 제공될 완성된 item !
     const cartContext = {
         cartItems: cartState.items,  // 업데이트 후에 장바구니 상태값
         addItem: addItemHandler,  // 상태를 업데이트하는 함수
-        removeItem: id => {}, // "
+        removeItem: removeItemHandler, // "
 
         totalPrice: cartState.totalPrice,
         totalAmount: cartState.totalAmount,
