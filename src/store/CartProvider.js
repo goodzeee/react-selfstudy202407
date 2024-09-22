@@ -7,7 +7,7 @@ const defaultState = {
 
     items: [], // 장바구니 배열 상태값
     totalPrice: 0, // 총액 상태값
-    totalAmount: 0, // 장바구니 수량 상태값
+    // totalAmount: 0, // 장바구니 수량 상태값
 };
 
 // reducer : 여러가지 복잡한 상태관리를 단순화시키며 중앙집중화한다.
@@ -22,18 +22,33 @@ const cartReducer = (state, action) => {
 // 💡💡계속 추가상태가 생기면 else if로 추가해서 중앙집중화 !!
     if (action.type === 'ADD') { // 장바구니에 추가하는 액션 
 
-        // 장바구니 배열상태 업데이트
-        const updateCartItems = [...state.items, action.value]
+        // 🌟🌟장바구니 배열상태 업데이트
+        // 장바구니에 추가될 신규 아이템 -> action.value
+        const newCartItem = action.value;
+        // 기존에 등록된 상품인지 확인해보기 위해 해당 아이템의 인덱스id 탐색 !
+        const index = state.items.findIndex(item => item.id === newCartItem.id);
+        // 기존에 존재하는 아이템배열 사본(업데이트 전 장바구니)
+        const existingItems = [...state.items];
+
+        // 신규 아이템인 경우
+        let updatedItems;
+        if (index === -1) { //-> 1. 기존에 장바구니에 없는 새로운 상품이 장바구니에 추가된 경우
+            updatedItems = [...existingItems, newCartItem]; //const updateCartItems = [...state.items, action.value]
+        } else { //-> 2. 이미 장바구니에 있던 상품의 추가 경우 -> 누적된 수량만 업뎃
+            existingItems[index].amount += newCartItem.amount;
+            updatedItems = [...existingItems];
+        }
+    
         // 총액 상태 업데이트 - 업데이트 전 가격 + 새로 추가한 상품 가격 * 수량
         const updatePrice = state.totalPrice + (action.value.price * action.value.amount);
 
-        const updateAmount = state.totalAmount + action.value.amount;
+        // const updateAmount = state.totalAmount + action.value.amount;
 
         return {
             // 업데이트 이전 상태인 state에 item을 복사한 뒤 새로운 action => item인 value를 붙여줌
-            items: updateCartItems,
+            items: updatedItems,
             totalPrice: updatePrice,
-            totalAmount: updateAmount,
+            // totalAmount: updateAmount,
         }; // 새로운 상태 - useState같은 느낌
     } else if (action.type === 'REMOVE') { // 장바구니에 삭제하는 액션
 
@@ -61,6 +76,7 @@ const CartProvider = ({children}) => {
             type: 'ADD',
             // 전달할 item => value
             value: item,
+
         })
     };
 

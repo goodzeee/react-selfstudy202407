@@ -4,9 +4,11 @@ import styles from './HeaderCartButton.module.scss';
 import CartContext from '../../store/cart-context';
 
 const HeaderCartButton = ({onShow}) => {
-    const {button, icon, badge} = styles;
 
-    const {totalAmount} = useContext(CartContext)
+    const {cartItems} = useContext(CartContext);
+    const numberOfCart = cartItems.reduce((accum, current) => accum + current.amount, 0);
+    
+    const {button, icon, badge} = styles;
     
   return (
     <button className={button} onClick={onShow}>
@@ -14,7 +16,7 @@ const HeaderCartButton = ({onShow}) => {
             <CartIcon/>
         </span>
         <span>My Cart</span>
-        <span className={badge}>{totalAmount}</span>
+        <span className={badge}>{numberOfCart}</span>
     </button>
   );
 };
